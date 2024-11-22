@@ -1,0 +1,89 @@
+<h1>STUDENT FORM</h1>
+<table border="1">
+    <tr>
+        <td style="font-weight: bold;">Name</td>
+        <td><input type="text" placeholder="Your Name" id="inputName"></td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold;">Age</td>
+        <td><input type="text" placeholder="Your Age" id="inputAge"></td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold;">Gender</td>
+        <td><input type="radio" name="gender" value="Male" class="inputGender">Male<input type="radio" name="gender"
+                value="Female" class="inputGender">Female</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold;">Course</td>
+        <td>
+            <select id="inputCourse">
+                <option>Python Programming</option>
+                <option>Java Programming</option>
+                <option>Web Development</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold;">E-mail</td>
+        <td><input type="text" placeholder="Your Email" id="inputEmail"></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: center;background-color: aquamarine; "><button
+                style="border: none; background-color: transparent;" onclick="saveButton(event)">Save</button></td>
+    </tr>
+</table>
+<br>
+<table border="1" id="result">
+    <tr>
+        <td>NAME</td>
+        <td>AGE</td>
+        <td>COURSE</td>
+        <td>GENDER</td>
+        <td>EMAIL</td>
+        <td>ACTION</td>
+    </tr>
+
+</table>
+
+
+<script>
+
+    function saveButton(event) {
+
+        var inputName = document.getElementById("inputName").value
+        var inputAge = document.getElementById("inputAge").value
+        var inputCourse = document.getElementById("inputCourse").value
+        var inputGender = document.querySelector('input[name="gender"]:checked')
+        var inputEmail = document.getElementById("inputEmail").value
+
+        var result = document.getElementById("result")
+        let row = result.insertRow(-1)
+
+        row.insertCell(0).innerText = inputName
+        row.insertCell(1).innerText = inputAge
+        row.insertCell(2).innerText = inputCourse
+        row.insertCell(3).innerText = inputGender.value
+        row.insertCell(4).innerText = inputEmail
+
+        var deleteCell = row.insertCell(5)
+        deleteCell.innerHTML =
+            "<button style='background-color: red; color: white;' id='del' onclick='deleted(event)'>Delete</button>"
+
+        clearInputs()
+        
+    }
+
+    function clearInputs(){
+        document.getElementById("inputName").value = ""
+        document.getElementById("inputAge").value = ""
+        document.getElementById("inputCourse").value = "Python Programming"
+        document.querySelectorAll('input[name="gender"]').forEach(input => input.checked = false)
+        document.getElementById("inputEmail").value = ""
+    }
+
+    function deleted(event) {
+        console.log(event.target.parentElement.parentElement.remove())
+    }
+
+
+</script>
